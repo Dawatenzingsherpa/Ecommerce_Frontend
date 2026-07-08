@@ -1,7 +1,36 @@
+import { useState} from "react"
+import type {ChangeEvent,FormEvent} from 'react'
+import { Link } from "react-router-dom"
+import type { Props, UserDataType } from "./types";
 
-const Form = () => {
+
+const Form:React.FC<Props>= ({type,onSubmit}) => {
+   const [userData,setUserData] = useState<UserDataType>({
+      email:"",
+      username : "",
+      password : ""
+    })
+
+    
+
+    const handleChange = (e:ChangeEvent<HTMLInputElement>)=>{
+      const {name,value} = e.target
+      setUserData({
+        ...userData,
+        [ name] : value
+      })
+    }
+    const handleSubmit = (e:FormEvent<HTMLFormElement>)=>{
+      e.preventDefault()
+      onSubmit(userData)
+    }
   return (
+   
+
+
     <>
+
+    
       {/* Pages: Sign In: Boxed */}
 
       {/* Page Container */}
@@ -33,7 +62,7 @@ const Form = () => {
                   <span>Company</span>
                 </h1>
                 <h2 className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                  Welcome, please sign in to your dashboard
+                  Welcome, please {type==='register'?'sign up':'sign in'} to your dashboard
                 </h2>
               </header>
               {/* END Header */}
@@ -42,9 +71,25 @@ const Form = () => {
               <div className="flex flex-col overflow-hidden rounded-lg bg-white shadow-xs dark:bg-gray-800 dark:text-gray-100">
                 <div className="grow p-5 md:px-16 md:py-12">
                   <form
-                    onSubmit={(e) => e.preventDefault()}
+                    onSubmit={handleSubmit}
                     className="space-y-6"
                   >
+                    {type==='register'?<div className="space-y-1">
+                      <label
+                        htmlFor="username"
+                        className="inline-block text-sm font-medium"
+                      >
+                        Username
+                      </label>
+                      <input
+                        type="username"
+                        id="username"
+                        name="username"
+                        placeholder="Enter your username"
+                        onChange={handleChange}
+                        className="block w-full rounded-lg border border-gray-200 px-5 py-3 leading-6 placeholder-gray-500 focus:border-blue-500 focus:ring-3 focus:ring-blue-500/50 dark:border-gray-600 dark:bg-gray-800 dark:placeholder-gray-400 dark:focus:border-blue-500"
+                      />
+                    </div>:''}
                     <div className="space-y-1">
                       <label
                         htmlFor="email"
@@ -57,6 +102,7 @@ const Form = () => {
                         id="email"
                         name="email"
                         placeholder="Enter your email"
+                        onChange={handleChange}
                         className="block w-full rounded-lg border border-gray-200 px-5 py-3 leading-6 placeholder-gray-500 focus:border-blue-500 focus:ring-3 focus:ring-blue-500/50 dark:border-gray-600 dark:bg-gray-800 dark:placeholder-gray-400 dark:focus:border-blue-500"
                       />
                     </div>
@@ -72,6 +118,7 @@ const Form = () => {
                         id="password"
                         name="password"
                         placeholder="Enter your password"
+                        onChange={handleChange}
                         className="block w-full rounded-lg border border-gray-200 px-5 py-3 leading-6 placeholder-gray-500 focus:border-blue-500 focus:ring-3 focus:ring-blue-500/50 dark:border-gray-600 dark:bg-gray-800 dark:placeholder-gray-400 dark:focus:border-blue-500"
                       />
                     </div>
@@ -95,6 +142,7 @@ const Form = () => {
                       </div>
                       <button
                         type="submit"
+                        
                         className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-blue-700 bg-blue-700 px-6 py-3 leading-6 font-semibold text-white hover:border-blue-600 hover:bg-blue-600 hover:text-white focus:ring-3 focus:ring-blue-400/50 active:border-blue-700 active:bg-blue-700 dark:focus:ring-blue-400/90"
                       >
                         <svg
@@ -110,7 +158,7 @@ const Form = () => {
                             clipRule="evenodd"
                           />
                         </svg>
-                        <span>Sign In</span>
+                        <span>{type==='register'?'Sign Up':'Sign In'}</span>
                       </button>
                       {/* Divider: With Label */}
                       <div className="my-5 flex items-center">
@@ -119,7 +167,7 @@ const Form = () => {
                           className="h-0.5 grow rounded-sm bg-gray-100 dark:bg-gray-700/75"
                         />
                         <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-800 dark:bg-gray-700 dark:text-gray-200">
-                          or sign in with
+                          or {type==='register'?'sign up':'sign in'} with
                         </span>
                         <span
                           aria-hidden="true"
@@ -162,15 +210,27 @@ const Form = () => {
                     </div>
                   </form>
                 </div>
-                <div className="grow bg-gray-50 p-5 text-center text-sm md:px-16 dark:bg-gray-700/50">
+
+                { type==='login' ?
+                  <div className="grow bg-gray-50 p-5 text-center text-sm md:px-16 dark:bg-gray-700/50">
                   Don’t have an account yet?{" "}
-                  <a
-                    href="#"
+                  <Link
+                    to="/register"
                     className="font-medium text-blue-600 hover:text-blue-400 dark:text-blue-400 dark:hover:text-blue-300"
                   >
                     Sign up
-                  </a>
-                </div>
+                  </Link>
+                </div> : 
+                <div className="grow bg-gray-50 p-5 text-center text-sm md:px-16 dark:bg-gray-700/50">
+                  Already have account?{" "}
+                  <Link
+                    to="/login"
+                    className="font-medium text-blue-600 hover:text-blue-400 dark:text-blue-400 dark:hover:text-blue-300"
+                  >
+                    Sign in
+                  </Link>
+                </div>}
+                
               </div>
               {/* END Sign In Form */}
 
