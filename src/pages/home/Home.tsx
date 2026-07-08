@@ -1,82 +1,222 @@
-import Card from "../../globals/componenets/card/Card"
-import Navbar from "../../globals/componenets/navbar/Navbar"
+import Navbar from "../../globals/componenets/navbar/Navbar";
+import Card from "../../globals/componenets/card/Card";
+import Footer from "../../globals/componenets/footer/Footer";
+
+const categories = [
+  { name: "Electronics", icon: "💻", color: "bg-blue-100" },
+  { name: "Fashion", icon: "👕", color: "bg-pink-100" },
+  { name: "Shoes", icon: "👟", color: "bg-green-100" },
+  { name: "Gaming", icon: "🎮", color: "bg-purple-100" },
+  { name: "Beauty", icon: "💄", color: "bg-rose-100" },
+  { name: "Watches", icon: "⌚", color: "bg-yellow-100" },
+  { name: "Home", icon: "🏠", color: "bg-orange-100" },
+  { name: "Phones", icon: "📱", color: "bg-cyan-100" },
+];
 
 const Home = () => {
   return (
-    <>
-    
-      {/* Hero Section: Centered with Simple Header */}
-      <div className="relative overflow-hidden bg-white dark:bg-gray-900 dark:text-gray-100">
-        {/* Main Header */}
-        <Navbar/>
-        {/* END Main Header */}
+    <div className="min-h-screen bg-gray-100">
+      <Navbar />
 
-        {/* Hero Content */}
-        <div className="relative container mx-auto px-4 py-16 lg:px-8 lg:py-32 xl:max-w-7xl">
-          <div className="text-center">
-            <div className="mb-5 font-['Caveat'] text-3xl text-blue-600 dark:text-blue-400">
-              Create your own website in minutes.
-            </div>
-            <h1 className="mb-4 text-4xl font-black lg:text-5xl dark:text-white">
-              Next generation website builder
+      {/* Hero */}
+      <section className="mx-auto max-w-7xl px-6 py-10">
+        <div className="grid items-center gap-8 rounded-3xl bg-gradient-to-r from-indigo-600 to-blue-500 p-8 text-white shadow-xl lg:grid-cols-2">
+          <div>
+            <span className="rounded-full bg-white/20 px-4 py-2 text-sm font-semibold">
+              🔥 Summer Sale
+            </span>
+
+            <h1 className="mt-5 text-5xl font-black leading-tight">
+              Everything you need,
+              <br />
+              at amazing prices.
             </h1>
-            <p className="mx-auto max-w-2xl text-lg/relaxed font-medium text-gray-700 lg:text-xl/relaxed dark:text-gray-300">
-              Super fast and easy to use software to power your next idea or
-              build your client’s web projects. Get it today and profit.
+
+            <p className="mt-5 text-blue-100">
+              Discover the latest products with huge discounts, fast shipping,
+              and secure checkout.
             </p>
+
+            <button className="mt-8 rounded-xl bg-white px-6 py-3 font-bold text-indigo-600 transition hover:scale-105">
+              Shop Now
+            </button>
           </div>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4 pb-28">
-            <a
-              href="#"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-blue-700 bg-blue-700 px-5 py-3.5 leading-6 font-semibold text-white hover:border-blue-600 hover:bg-blue-600 hover:text-white focus:ring-3 focus:ring-blue-400/50 active:border-blue-700 active:bg-blue-700 dark:focus:ring-blue-400/90"
-            >
-              <svg
-                className="hi-mini hi-arrow-down-tray inline-block size-5 opacity-75"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path d="M10.75 2.75a.75.75 0 00-1.5 0v8.614L6.295 8.235a.75.75 0 10-1.09 1.03l4.25 4.5a.75.75 0 001.09 0l4.25-4.5a.75.75 0 00-1.09-1.03l-2.955 3.129V2.75z" />
-                <path d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z" />
-              </svg>
-              <span>Download for free</span>
-            </a>
-            <a
-              href="#"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-gray-200 bg-white px-5 py-3.5 leading-6 font-semibold text-gray-800 hover:border-gray-300 hover:text-gray-900 hover:shadow-xs focus:ring-3 focus:ring-gray-300/25 active:border-gray-200 active:shadow-none dark:border-gray-700 dark:bg-transparent dark:text-gray-300 dark:hover:border-gray-600 dark:hover:text-gray-200 dark:focus:ring-gray-600/40 dark:active:border-gray-700"
-            >
-              <span>Learn more</span>
-            </a>
-          </div>
-          <div className="relative mx-auto max-w-4xl">
-            <div className="bg-tranparent absolute top-0 left-0 -mt-16 -ml-20 size-40 rounded-full border border-gray-500/10 lg:size-64 dark:border-white/5" />
-            <div className="bg-tranparent absolute top-0 left-0 -mt-20 -ml-14 size-40 rounded-full border border-gray-500/20 lg:size-64 dark:border-white/15" />
-            <div className="bg-tranparent absolute right-0 bottom-0 -mr-20 -mb-16 size-40 rounded-full border border-gray-500/10 lg:size-64 dark:border-white/5" />
-            <div className="bg-tranparent absolute right-0 bottom-0 -mr-14 -mb-20 size-40 rounded-full border border-gray-500/20 lg:size-64 dark:border-white/15" />
-            <div className="absolute inset-0 -m-3 rounded-3xl border border-gray-200 bg-gray-200/20 shadow-lg shadow-gray-200/50 backdrop-blur-xs dark:border-white/10 dark:bg-white/5 dark:shadow-black/10" />
+
+          <div>
             <img
-              src="https://cdn.tailkit.com/media/placeholders/photo-SYTO3xs06fU-1440x960.jpg"
-              className="relative mx-auto aspect-4/3 w-full rounded-2xl object-cover shadow-sm shadow-gray-300/50 dark:shadow-gray-700/50"
-              alt="Hero Image"
+              src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=900"
+              alt="Shopping"
+              className="h-[380px] w-full rounded-3xl object-cover"
             />
           </div>
         </div>
-        {/* END Hero Content */}
-      </div>
-      {/* END Hero Section: Centered with Simple Header */}
-      <h1>Top Product</h1>
-      <div className="flex gap-4">
-        <Card/>
-      <Card/>
-      <Card/>
-      </div>
-      
+      </section>
 
-   
-    </>
-    
-  )
-}
+      {/* Categories */}
+      <section className="mx-auto max-w-7xl px-6 py-12">
+        <div className="mb-8 flex items-center justify-between">
+          <h2 className="text-3xl font-bold">Browse Categories</h2>
 
-export default Home
+          <button className="font-semibold text-indigo-600">
+            See All →
+          </button>
+        </div>
+
+        <div className="grid grid-cols-2 gap-5 md:grid-cols-4">
+          {categories.map((item) => (
+            <div
+              key={item.name}
+              className={`${item.color} cursor-pointer rounded-2xl p-6 text-center transition hover:-translate-y-1 hover:shadow-lg`}
+            >
+              <div className="text-4xl">{item.icon}</div>
+
+              <h3 className="mt-4 font-semibold">{item.name}</h3>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Trending Products */}
+      <section className="mx-auto max-w-7xl px-6 py-12">
+        <div className="mb-8 flex items-center justify-between">
+          <h2 className="text-3xl font-bold">Trending Products</h2>
+
+          <button className="font-semibold text-indigo-600">
+            View All →
+          </button>
+        </div>
+
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+        </div>
+      </section>
+            {/* Promo Cards */}
+      <section className="mx-auto max-w-7xl px-6 py-12">
+        <div className="grid gap-6 md:grid-cols-2">
+          <div className="rounded-3xl bg-gradient-to-r from-orange-500 to-red-500 p-8 text-white">
+            <p className="text-sm uppercase tracking-widest">
+              New Collection
+            </p>
+
+            <h2 className="mt-3 text-3xl font-bold">
+              Fresh Styles
+            </h2>
+
+            <p className="mt-4 text-orange-100">
+              Discover our newest arrivals with modern designs.
+            </p>
+
+            <button className="mt-6 rounded-xl bg-white px-5 py-3 font-semibold text-orange-600">
+              Shop Now
+            </button>
+          </div>
+
+          <div className="rounded-3xl bg-gradient-to-r from-blue-600 to-indigo-700 p-8 text-white">
+            <p className="text-sm uppercase tracking-widest">
+              Electronics Sale
+            </p>
+
+            <h2 className="mt-3 text-3xl font-bold">
+              Up to 40% OFF
+            </h2>
+
+            <p className="mt-4 text-blue-100">
+              Grab amazing deals on phones, laptops and accessories.
+            </p>
+
+            <button className="mt-6 rounded-xl bg-white px-5 py-3 font-semibold text-indigo-600">
+              Explore
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Popular Products */}
+      <section className="mx-auto max-w-7xl px-6 py-12">
+        <div className="mb-8 flex items-center justify-between">
+          <h2 className="text-3xl font-bold">Popular Products</h2>
+
+          <button className="font-semibold text-indigo-600">
+            View All →
+          </button>
+        </div>
+
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+        </div>
+      </section>
+
+      {/* Features */}
+      <section className="mx-auto max-w-7xl px-6 py-12">
+        <div className="grid gap-6 md:grid-cols-4">
+          <div className="rounded-2xl bg-white p-6 text-center shadow-sm">
+            <div className="text-4xl">🚚</div>
+            <h3 className="mt-4 font-bold">Free Shipping</h3>
+            <p className="mt-2 text-sm text-gray-500">
+              Orders above $50
+            </p>
+          </div>
+
+          <div className="rounded-2xl bg-white p-6 text-center shadow-sm">
+            <div className="text-4xl">🔒</div>
+            <h3 className="mt-4 font-bold">Secure Payment</h3>
+            <p className="mt-2 text-sm text-gray-500">
+              100% Protected
+            </p>
+          </div>
+
+          <div className="rounded-2xl bg-white p-6 text-center shadow-sm">
+            <div className="text-4xl">⭐</div>
+            <h3 className="mt-4 font-bold">Top Quality</h3>
+            <p className="mt-2 text-sm text-gray-500">
+              Trusted Products
+            </p>
+          </div>
+
+          <div className="rounded-2xl bg-white p-6 text-center shadow-sm">
+            <div className="text-4xl">💬</div>
+            <h3 className="mt-4 font-bold">24/7 Support</h3>
+            <p className="mt-2 text-sm text-gray-500">
+              We're Here to Help
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter */}
+      <section className="mx-auto max-w-7xl px-6 py-12">
+        <div className="rounded-3xl bg-gray-900 px-8 py-12 text-center text-white">
+          <h2 className="text-3xl font-bold">
+            Subscribe to Our Newsletter
+          </h2>
+
+          <p className="mt-3 text-gray-300">
+            Get the latest offers and product updates.
+          </p>
+
+          <div className="mx-auto mt-8 flex max-w-xl flex-col gap-4 sm:flex-row">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="flex-1 rounded-xl px-5 py-3 text-black outline-none"
+            />
+
+            <button className="rounded-xl bg-indigo-600 px-6 py-3 font-semibold hover:bg-indigo-700">
+              Subscribe
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <Footer/>
+    </div>
+  );
+};
+
+export default Home;
