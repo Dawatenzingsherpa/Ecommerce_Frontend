@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import Form from "../Form"
 import { LoginDataType } from "../types"
-import { useAppDispatch, useAppSelector } from "../../../store/Hook"
+import { useAppDispatch, useAppSelector } from "../../../store/hook"
 import { login, resetStatus, Status } from "../../../store/authSlice"
 import { useEffect } from "react"
 const Login = () => {

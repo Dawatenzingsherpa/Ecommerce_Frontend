@@ -1,7 +1,27 @@
 import { Link } from "react-router-dom";
 import { ShoppingCart, Search, Menu } from "lucide-react";
+import { useAppDispatch, useAppSelector } from "../../../store/hook";
+import { useEffect, useState } from "react";
+import { setToken } from "../../../store/authSlice";
 
 const Navbar = () => {
+  const dispatch = useAppDispatch()
+  const {user} = useAppSelector((state)=>state.auth)
+  const [isLoggedIn,setIsLoggedIn] = useState<boolean>(false)
+
+  useEffect(()=>{
+    const token = localStorage.getItem('token')
+    setIsLoggedIn(!!token || !!user.token)
+
+  },[user.token])
+
+  const handleLogout = ()=>{
+    localStorage.removeItem('token')
+    dispatch(setToken(''))
+    
+    setIsLoggedIn(false)
+  }
+
   return (
     <header className="relative flex flex-none items-center py-6">
       <div className="container mx-auto px-4 lg:px-8 xl:max-w-7xl">
@@ -107,8 +127,9 @@ const Navbar = () => {
 
             </Link>
 
-
-            {/* Login */}
+            
+            {isLoggedIn===false?(
+              <>
             <Link
               to="/login"
               className="
@@ -132,6 +153,8 @@ const Navbar = () => {
 
 
             {/* Register */}
+
+            
             <Link
               to="/register"
               className="
@@ -153,6 +176,35 @@ const Navbar = () => {
             >
               Register
             </Link>
+              </>
+
+            ):(
+              <Link
+              to="/login"
+              onClick={handleLogout}
+              className="
+                hidden 
+                rounded-xl 
+                bg-indigo-600 
+                px-3 py-2 
+                text-sm
+                font-semibold 
+                text-white 
+                transition 
+                hover:bg-indigo-700
+                lg:px-5 
+                lg:py-3
+                lg:text-base
+                sm:block
+              "
+            >
+              Logout
+            </Link>
+            
+            )}
+
+            
+            
 
 
             {/* Mobile */}
