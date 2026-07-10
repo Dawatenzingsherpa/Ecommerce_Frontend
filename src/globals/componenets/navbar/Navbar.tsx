@@ -3,22 +3,27 @@ import { ShoppingCart, Search, Menu } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "../../../store/hook";
 import { useEffect, useState } from "react";
 import { setToken } from "../../../store/authSlice";
+import { fetchCartItems } from "../../../store/CartSlice";
 
 const Navbar = () => {
   const dispatch = useAppDispatch()
+  const [totalCartItem,setTotalCartItem] = useState<number>(0)
   const {user} = useAppSelector((state)=>state.auth)
   const [isLoggedIn,setIsLoggedIn] = useState<boolean>(false)
+  const cartQuantity = Number(localStorage.getItem("totalCartItem"))
+  
 
   useEffect(()=>{
     const token = localStorage.getItem('token')
+    dispatch(fetchCartItems())
     setIsLoggedIn(!!token || !!user.token)
-
-  },[user.token])
+    setTotalCartItem(cartQuantity)
+    
+  },[user.token,dispatch])
 
   const handleLogout = ()=>{
     localStorage.removeItem('token')
     dispatch(setToken(''))
-    
     setIsLoggedIn(false)
   }
 
@@ -122,7 +127,7 @@ const Navbar = () => {
 
 
               <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-indigo-600 text-xs text-white">
-                2
+                {totalCartItem}
               </span>
 
             </Link>

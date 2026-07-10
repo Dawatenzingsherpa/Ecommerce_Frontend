@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
-import API from '../http'
+import {API} from '../http'
 import { Product, ProductState } from '../globals/componenets/types/productTypes'
 import { Status } from './authSlice'
 import { AppDispatch } from './store'
