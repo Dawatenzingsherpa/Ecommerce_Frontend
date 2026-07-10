@@ -27,5 +27,6 @@ export interface Product{
 
 export interface ProductState{
   product : Product[],
-  status : Status
+  status : Status,
+  singleProduct : Product
 }

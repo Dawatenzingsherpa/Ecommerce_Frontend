@@ -5,7 +5,7 @@ import  productSlice from "./productSlice";
 const store = configureStore({
   reducer:{
     auth : authSlice,
-    product : productSlice
+    products : productSlice
   }
 })
 

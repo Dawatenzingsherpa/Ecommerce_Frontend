@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { Product } from "../types/productTypes"
 
 interface CardProps{
@@ -7,7 +8,7 @@ const Card:React.FC<CardProps>= ({data}) => {
   
   return (
     <>
-     
+      <Link to={`/product/${data.id}`}>
       <div className="relative flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
         <div className="relative mx-4 mt-4 h-96 overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700">
           <img
@@ -37,6 +38,7 @@ const Card:React.FC<CardProps>= ({data}) => {
           </button>
         </div>
       </div>
+      </Link>
     </>
   )
 }

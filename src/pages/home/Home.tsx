@@ -1,5 +1,4 @@
 import Navbar from "../../globals/componenets/navbar/Navbar";
-import Card from "../../globals/componenets/card/Card";
 import Footer from "../../globals/componenets/footer/Footer";
 import Hero from "./components/Hero";
 import { useAppDispatch, useAppSelector } from "../../store/hook";
@@ -14,7 +13,7 @@ import  Features  from "./components/Features";
 
 const Home = () => {
   const dispatch = useAppDispatch()
-  const {product} = useAppSelector((state)=> state.product)
+  const {product} = useAppSelector((state)=> state.products)
   
 
   useEffect(()=>{
