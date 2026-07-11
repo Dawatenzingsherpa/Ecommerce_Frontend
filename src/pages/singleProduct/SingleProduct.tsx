@@ -4,7 +4,7 @@ import Navbar from "../../globals/componenets/navbar/Navbar"
 import {useParams} from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from "../../store/hook";
 import { fetchProductById} from "../../store/productSlice";
-import { addToCart, CartItem, fetchCartItems} from "../../store/CartSlice";
+import { addToCart, fetchCartItems} from "../../store/CartSlice";
 
 const Singleproduct = () => {
   const {id} = useParams<string>();
@@ -22,11 +22,10 @@ const Singleproduct = () => {
   },[id,dispatch])
 
   const handleAddToCart = ()=>{
-    const cartItem:CartItem ={
-      productId : id as string,
-      quantity : 1
+    if(id){
+    dispatch(addToCart(id)) 
+
     }
-    dispatch(addToCart(cartItem)) 
   }
   
   return (

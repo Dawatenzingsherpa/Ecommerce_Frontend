@@ -2,20 +2,29 @@ import {createSlice, type PayloadAction} from '@reduxjs/toolkit'
 import { Status } from './authSlice'
 import { AppDispatch } from './store'
 import  { APIAuthenticated } from '../http'
+import { Product } from '../globals/componenets/types/productTypes'
 
 export interface CartItem{
-  productId: string,
+  Product: Product,
   quantity : number
 }
 
 interface CartState{
-  item : CartItem[],
+  items : CartItem[],
   status : Status
 }
 
 const initialState : CartState = {
-  item : [],
+  items : [],
   status : Status.LOADING
+}
+
+interface DeleteAction{
+  productId : string
+}
+export interface Update extends DeleteAction{
+  productId :string,
+  quantity: number
 }
 
 const CartSlice = createSlice({
@@ -24,25 +33,39 @@ const CartSlice = createSlice({
   reducers : {
 
     setItems(state:CartState,action:PayloadAction<CartItem[]>){
-      state.item = action.payload
+      state.items = action.payload
     },
     setStatus(state:CartState,action : PayloadAction<Status>){
       state.status = action.payload
+    },
+    setDeleteItem(state:CartState,action: PayloadAction<DeleteAction>){
+      const index = state.items.findIndex((item)=>item.Product.id === action.payload.productId)
+      state.items.splice(index,1)
+      
+    },
+    setUpdateQuantity(state:CartState,action:PayloadAction<Update>){
+      const index = state.items.findIndex((item)=>item.Product.id = action.payload.productId)
+      if(index !==-1){
+        state.items[index].quantity = action.payload.quantity
+      }
     }
     
   }
 })
 
-export const {setItems,setStatus} = CartSlice.actions
+export const {setItems,setStatus,setDeleteItem,setUpdateQuantity} = CartSlice.actions
 export default CartSlice.reducer
 
-export function addToCart(data:CartItem){
+export function addToCart(id:string){
   
   return async function addToCartThunk(dispatch:AppDispatch) {
     
     dispatch(setStatus(Status.LOADING))
     try{
-      const response = await APIAuthenticated.post("customer/cart",data)
+      const response = await APIAuthenticated.post("customer/cart",{
+        productId : id,
+        quantity : 1
+      })
       if(response.status===201){
         const {data} = response.data
         
@@ -67,10 +90,46 @@ export function fetchCartItems(){
       const response = await APIAuthenticated.get("customer/cart")
       if(response.status===200){
         const {data} = response.data
-        const totalCartItem = response.data.data.length
         dispatch(setItems(data))
         dispatch(setStatus(Status.SUCCESS))
-        localStorage.setItem("totalCartItem",totalCartItem)
+      }else{
+        dispatch(setStatus(Status.ERROR))
+      }
+    } catch (error) {
+      dispatch(setStatus(Status.ERROR))
+    }
+  }
+}
+
+
+export function deleteCartItems(productId:string){
+  return async function deleteCartItemsThunk(dispatch:AppDispatch) {
+    dispatch(setStatus(Status.LOADING))
+    try {
+      const response = await APIAuthenticated.delete("customer/cart/"+productId)
+      if(response.status===200){
+        dispatch(setDeleteItem({productId}))
+        dispatch(setStatus(Status.SUCCESS))
+      }else{
+        dispatch(setStatus(Status.ERROR))
+      }
+    } catch (error) {
+      dispatch(setStatus(Status.ERROR))
+    }
+  }
+}
+
+
+export function updateCartItemQuantity(productId:string,quantity:number){
+  return async function updateCartItemQuantityThunk(dispatch:AppDispatch) {
+    dispatch(setStatus(Status.LOADING))
+    try {
+      const response = await APIAuthenticated.patch("customer/cart/"+productId,{
+        quantity : quantity
+      })
+      if(response.status===200){
+        dispatch(setUpdateQuantity({productId,quantity}))
+        dispatch(setStatus(Status.SUCCESS))
       }else{
         dispatch(setStatus(Status.ERROR))
       }

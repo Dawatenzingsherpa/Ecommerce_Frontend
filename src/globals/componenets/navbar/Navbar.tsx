@@ -7,19 +7,18 @@ import { fetchCartItems } from "../../../store/CartSlice";
 
 const Navbar = () => {
   const dispatch = useAppDispatch()
-  const [totalCartItem,setTotalCartItem] = useState<number>(0)
   const {user} = useAppSelector((state)=>state.auth)
   const [isLoggedIn,setIsLoggedIn] = useState<boolean>(false)
-  const cartQuantity = Number(localStorage.getItem("totalCartItem"))
+  const {items} = useAppSelector((state)=>state.cart)
+  
   
 
   useEffect(()=>{
     const token = localStorage.getItem('token')
     dispatch(fetchCartItems())
     setIsLoggedIn(!!token || !!user.token)
-    setTotalCartItem(cartQuantity)
     
-  },[user.token,dispatch])
+  },[user.token,items.length])
 
   const handleLogout = ()=>{
     localStorage.removeItem('token')
@@ -127,7 +126,7 @@ const Navbar = () => {
 
 
               <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-indigo-600 text-xs text-white">
-                {totalCartItem}
+                <sub>{items.length}</sub>
               </span>
 
             </Link>
