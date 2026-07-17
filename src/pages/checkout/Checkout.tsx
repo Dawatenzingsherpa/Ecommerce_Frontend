@@ -5,8 +5,8 @@ import { useAppDispatch } from "../../store/hook"
 import { Status } from "../../store/authSlice"
 import Footer from "../../globals/componenets/footer/Footer"
 import Navbar from "../../globals/componenets/navbar/Navbar"
-import { PaymentMethod } from "../../globals/componenets/types/checkoutTypes"
-import { OrderData ,ItemDetail} from "../../globals/componenets/types/checkoutTypes"
+import { CreateOrderData, PaymentMethod } from "../../globals/componenets/types/checkoutTypes"
+import { ItemDetail} from "../../globals/componenets/types/checkoutTypes"
 import { createOrder } from "../../store/checkoutSlice"
 import { useNavigate } from "react-router-dom"
 
@@ -16,7 +16,7 @@ const Checkout = () => {
   const { items } = useAppSelector((state) => state.cart)
   const{khaltiUrl,status} = useAppSelector((state)=>state.orders)
   const [paymentMethod,setPaymentMethod] = useState<PaymentMethod>(PaymentMethod.Cod)
-  const [data,setData] = useState<OrderData>({
+  const [data,setData] = useState<CreateOrderData>({
     phoneNumber : "",
     shippingAddress : '',
     totalAmount: 0,
@@ -61,7 +61,7 @@ const Checkout = () => {
       }
     })
 
-    const orderData ={
+    const orderData:CreateOrderData ={
       ...data,
       items : itemDetails,
       totalAmount : subTotal+150
