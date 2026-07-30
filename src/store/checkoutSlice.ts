@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Status } from "./authSlice";
-import { CreateOrderData, OrderData, OrderDetails, OrderResponseData, OrderResponseItem } from "../globals/componenets/types/checkoutTypes";
+import { CreateOrderData, OrderData, OrderDetails, OrderResponseData, OrderResponseItem, OrderStatus } from "../globals/componenets/types/checkoutTypes";
 import { AppDispatch } from "./store";
 import { APIAuthenticated } from "../http";
+
 
 
 
@@ -32,11 +33,17 @@ const orderSlice = createSlice({
     },
     setOrderDetails(state:OrderResponseData,action:PayloadAction<OrderDetails[]>){
       state.orderDetails = action.payload
+    },
+    setUpdateOrderStatus(state:OrderResponseData,action:PayloadAction<{status:OrderStatus,orderId : string}>){
+      const status = action.payload.status
+      const orderId = action.payload.orderId
+      const updateOrders = state.myOrder.map((order:any)=>order.id===orderId ? {...order,orderStatus : status} : order)
+      state.myOrder = updateOrders
     }
   }
 })
 
-export const { setOrderData, setStatus, setKhaltiUrl,setMyOrder,setOrderDetails } = orderSlice.actions
+export const { setOrderData, setStatus, setKhaltiUrl,setMyOrder,setOrderDetails,setUpdateOrderStatus } = orderSlice.actions
 export default orderSlice.reducer
 
 
@@ -115,6 +122,12 @@ export function cancelOrder(id : string){
     }catch(error){
       dispatch(setStatus(Status.ERROR))
     }
+  }
+}
+
+export function updateOrderStatus(data:any){
+  return async function updateOrderStatusThunk(dispatch:AppDispatch) {
+    dispatch(setUpdateOrderStatus(data))
   }
 }
 

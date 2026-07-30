@@ -10,6 +10,11 @@ import Cart from './pages/cart/Cart'
 import Checkout from './pages/checkout/Checkout'
 import MyOrder from './pages/order/myorders/MyOrder'
 import MyOrderDetails from './pages/order/myorders/MyOrderDetails'
+import {io} from "socket.io-client"
+
+export const socket = io("http://localhost:3000",{auth: {
+  token : localStorage.getItem("token")
+}})
 
 function App() {
 

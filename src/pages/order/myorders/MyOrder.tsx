@@ -3,9 +3,10 @@ import { Search } from "lucide-react"
 import Footer from "../../../globals/componenets/footer/Footer"
 import Navbar from "../../../globals/componenets/navbar/Navbar"
 import { useAppDispatch, useAppSelector } from "../../../store/hook"
-import { cancelOrder, fetchMyOrders } from "../../../store/checkoutSlice"
+import { cancelOrder, fetchMyOrders, updateOrderStatus } from "../../../store/checkoutSlice"
 import { Link } from "react-router-dom"
 import { OrderStatus } from "../../../globals/componenets/types/checkoutTypes"
+import {socket} from "../../../App"
 
 const MyOrder = () => {
   const dispatch = useAppDispatch()
@@ -17,6 +18,12 @@ const MyOrder = () => {
   useEffect(() => {
     dispatch(fetchMyOrders())
   }, [dispatch])
+
+  useEffect(()=>{
+    socket.on('statusUpdated',(data:any)=>{
+      dispatch(updateOrderStatus(data))
+    })
+  },[socket])
 
 
   const filterMyOrders = myOrder.filter((order) => selectedItem === OrderStatus.All || order.orderStatus === selectedItem).
