@@ -68,17 +68,6 @@ const Navbar = () => {
 
           {/* Right Section */}
           <div className="flex shrink-0 items-center gap-3">
-            {/* Search */}
-            <div className="hidden items-center rounded-xl bg-gray-100 px-3 py-2 lg:flex">
-              <Search size={18} className="text-gray-500" />
-
-              <input
-                type="text"
-                placeholder="Search"
-                className="ml-2 w-28 bg-transparent text-sm outline-none"
-              />
-            </div>
-
             {/* Cart */}
             <Link
               to="/cart"
