@@ -4,31 +4,27 @@ import Hero from "./components/Hero";
 import { useAppDispatch, useAppSelector } from "../../store/hook";
 import { useEffect } from "react";
 import { fetchPorducts } from "../../store/productSlice";
-import Categoris from "./components/Categoris";
 import Trending from "./components/Trending";
 import PromoCard from "./components/PromoCard";
-import  Features  from "./components/Features";
-
-
+import Features from "./components/Features";
 
 const Home = () => {
-  const dispatch = useAppDispatch()
-  const {product} = useAppSelector((state)=> state.products)
-  
+  const dispatch = useAppDispatch();
+  const { products } = useAppSelector((state) => state.products);
 
-  useEffect(()=>{
-    dispatch(fetchPorducts())
-  },[])
+  useEffect(() => {
+    dispatch(fetchPorducts());
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-100">
       <Navbar />
-      <Hero/>
-      <Categoris/>
-      <Trending product={product}/>
-      <PromoCard/>
-      <Features/>
-      <Footer/>
+      <Hero />
+
+      <Trending product={products} />
+      <PromoCard />
+      <Features />
+      <Footer />
     </div>
   );
 };
