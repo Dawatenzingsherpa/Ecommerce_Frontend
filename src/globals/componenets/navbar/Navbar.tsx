@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ShoppingCart, Search, Menu } from "lucide-react";
+import { ShoppingCart, Menu } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "../../../store/hook";
 import { useEffect, useState } from "react";
 import { setToken } from "../../../store/authSlice";
