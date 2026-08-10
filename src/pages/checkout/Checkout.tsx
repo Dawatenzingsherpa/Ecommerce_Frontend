@@ -39,6 +39,7 @@ const Checkout = () => {
   useEffect(() => {
     dispatch(fetchCartItems());
   }, [dispatch]);
+
   useEffect(() => {
     if (status === Status.SUCCESS) {
       dispatch(resetCart());
@@ -85,7 +86,9 @@ const Checkout = () => {
     }
 
     alert("Order Placed Successfully");
-    navigate("/");
+    if (status === Status.SUCCESS) {
+      navigate("/");
+    }
   };
 
   return (
