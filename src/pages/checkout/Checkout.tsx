@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { useAppSelector } from "../../store/hook";
-import { fetchCartItems } from "../../store/CartSlice";
+import { fetchCartItems, resetCart } from "../../store/CartSlice";
 import { useAppDispatch } from "../../store/hook";
 import { Status } from "../../store/authSlice";
 import Footer from "../../globals/componenets/footer/Footer";
@@ -81,6 +81,7 @@ const Checkout = () => {
 
     if (status === Status.SUCCESS) {
       alert("Order Placed Successfully");
+      dispatch(resetCart());
       navigate("/");
     }
   };

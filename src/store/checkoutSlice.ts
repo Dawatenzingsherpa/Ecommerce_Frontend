@@ -79,7 +79,7 @@ export function createOrder(data: CreateOrderData) {
       const response = await APIAuthenticated.post("order", data);
       if (response) {
         dispatch(setOrderData(response.data.data));
-        dispatch(resetCart());
+
         dispatch(setStatus(Status.SUCCESS));
         if (response.data.url) {
           dispatch(setKhaltiUrl(response.data.url));
