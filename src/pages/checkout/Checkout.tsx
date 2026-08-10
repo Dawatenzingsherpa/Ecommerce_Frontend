@@ -42,8 +42,6 @@ const Checkout = () => {
   useEffect(() => {
     if (status === Status.SUCCESS) {
       dispatch(resetCart());
-      alert("Order Placed Successfully");
-      navigate("/");
     }
   }, [status]);
 
@@ -85,6 +83,9 @@ const Checkout = () => {
     if (khaltiUrl) {
       window.location.href = khaltiUrl;
     }
+
+    alert("Order Placed Successfully");
+    navigate("/");
   };
 
   return (
