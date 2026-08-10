@@ -51,8 +51,8 @@ const CartSlice = createSlice({
         state.items[index].quantity = action.payload.quantity;
       }
     },
-    resetCart(state: CartState, action: PayloadAction) {
-      state.items.length = 0;
+    resetCart(state: CartState) {
+      state.items = [];
     },
   },
 });

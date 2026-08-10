@@ -74,6 +74,7 @@ const Checkout = () => {
     };
 
     await dispatch(createOrder(orderData));
+    dispatch(resetCart());
 
     if (khaltiUrl) {
       window.location.href = khaltiUrl;
@@ -81,7 +82,7 @@ const Checkout = () => {
 
     if (status === Status.SUCCESS) {
       alert("Order Placed Successfully");
-      dispatch(resetCart());
+
       navigate("/");
     }
   };

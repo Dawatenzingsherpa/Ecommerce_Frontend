@@ -10,7 +10,6 @@ import {
 } from "../globals/componenets/types/checkoutTypes";
 import { AppDispatch } from "./store";
 import { APIAuthenticated } from "../http";
-import { resetCart } from "./CartSlice";
 
 const initialState: OrderResponseData = {
   items: [],
@@ -79,7 +78,6 @@ export function createOrder(data: CreateOrderData) {
       const response = await APIAuthenticated.post("order", data);
       if (response) {
         dispatch(setOrderData(response.data.data));
-
         dispatch(setStatus(Status.SUCCESS));
         if (response.data.url) {
           dispatch(setKhaltiUrl(response.data.url));
