@@ -12,7 +12,7 @@ import MyOrderDetails from "./pages/order/myorders/MyOrderDetails";
 import { io } from "socket.io-client";
 import Products from "./pages/product/Product";
 
-export const socket = io("http://localhost:3000", {
+export const socket = io("https://project2backend-f2fx.onrender.com/", {
   auth: {
     token: localStorage.getItem("token"),
   },

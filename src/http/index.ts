@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:3000/",
+  baseURL: "https://project2backend-f2fx.onrender.com/",
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
@@ -9,7 +9,7 @@ const API = axios.create({
 });
 
 const APIAuthenticated = axios.create({
-  baseURL: "http://localhost:3000/",
+  baseURL: "https://project2backend-f2fx.onrender.com/",
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
