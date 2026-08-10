@@ -95,7 +95,7 @@ const Cart = () => {
 
                         <button
                           type="button"
-                          onClick={() => handleDelete(item?.Product.id)}
+                          onClick={() => handleDelete(item?.Product?.id)}
                           className="cursor-pointer"
                         >
                           <svg
