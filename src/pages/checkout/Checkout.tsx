@@ -39,6 +39,13 @@ const Checkout = () => {
   useEffect(() => {
     dispatch(fetchCartItems());
   }, [dispatch]);
+  useEffect(() => {
+    if (status === Status.SUCCESS) {
+      dispatch(resetCart());
+      alert("Order Placed Successfully");
+      navigate("/");
+    }
+  }, [status]);
 
   const handlePaymentMethod = (e: ChangeEvent<HTMLInputElement>) => {
     setPaymentMethod(e.target.value as PaymentMethod);
@@ -74,16 +81,9 @@ const Checkout = () => {
     };
 
     await dispatch(createOrder(orderData));
-    dispatch(resetCart());
 
     if (khaltiUrl) {
       window.location.href = khaltiUrl;
-    }
-
-    if (status === Status.SUCCESS) {
-      alert("Order Placed Successfully");
-
-      navigate("/");
     }
   };
 
